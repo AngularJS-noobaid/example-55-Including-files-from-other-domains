@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Including files from other domains</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<style>
+			input[type=submit]{	
+				background-color: #64ae3c;
+				font-size: 14px;
+				border:none;
+				color:white;	
+				width:60px;
+				height:30px;
+				border-radius:3px;
+			}
+
+			select {
+				font-size:20px;
+			}
+		</style>
+	</head>
+
+	
+	<body ng-app="myApp" ng-controller="myCtrl">
+		<div style="background-color:rgb(45,91,137)">		
+			<img src="images/logo.png">	
+
+		 	<form>
+  				<input type="text" name="name" placeholder="Name">
+  				<input type="password" name="password" placeholder="Password">
+ 		 		<input type="submit" value="Log In">
+				<input type="submit" value="Sign Up">
+			</form>			
+		</div>
+
+
+		<select ng-model="selectedOption" ng-init="selectedOption=options[0]" ng-options="x for x in options">
+		</select>
+
+
+		<select>	
+			<option selected disabled>IdeaFest</option>
+			<option ng-repeat="x in options2">{{x}}</option>
+		</select>
+
+		<select ng-model="selectedCamp" ng-init="selectedCamp=camps.cc01" ng-options="y for (x, y) in camps">
+		</select>
+
+
+		<img src="images/banner-img.jpg" width="100%">
+
+
+		<h1>Newest Projects</h1>
+		
+		<ul>
+  			<li ng-repeat="x in myData">
+    				{{ x.name + ', ' + x.description }}
+ 			 </li>
+		</ul>
+
+
+		<h1>How Ideabakr works</h1>
+		
+		<ul>
+			<li>Got An Idea?</li>
+			<li>Submit The Idea</li>
+			<li>We Do The Work</li>
+			<li>You Win!</li>
+		</ul>	
+
+		<button ng-click="readMore()">Read More</button>
+		
+		<h1>Why Ideabaker?</h1>
+			
+		<button ng-click="showFunc()">Highlights</button>
+
+		<div ng-show="showMe">
+    			<ul>
+    				<li>Grant: By submitting your idea for Ideabakr's Ideafest, 
+					your idea has a chance of getting selected and securing
+					an assistance grant.</li>
+    				<li>Employment Benefit: Employers and interviewers are often impressed
+				 	with people who have good initiatives. You will gain public recognition
+					if your idea is promoted.</li>
+    				<li>Collaboration: If you choose to execute your idea yourself, Ideabakr puts your 
+					idea in front of other people with skills such as programming, marketing, 
+					business development, sales, etc that complement yours.</li>
+    				<li>Funding: Ideabakr attempts to put all submitted ideas in front of collaborators and investors. 
+					If an investor likes your idea, he or she may choose to invest in your idea.</li>
+			</ul>
+		</div>
+
+		<h1>Subscribe to our Mailing List</h1>
+		
+		<input type="text" ng-click="handleClick($event)" value="Your email address" >
+
+
+		<br><br>
+		
+		<form>
+    			Is this your first time on this website?: 
+			<input type="checkbox" ng-model="newUser">
+		</form>
+
+		<h1 ng-show="newUser">Read the FAQ, then sign up!</h1>
+
+		<br><br>
+	
+		<form>
+			Who are you?:<br>
+			<input type="radio" ng-model="who" value="student">A student/programmer who would like to work on an abandoned project<br>
+			<input type="radio" ng-model="who" value="company">A company/programmer who has an abandoned project they'd like to donate
+		</form>
+		
+		<div ng-switch="who">
+			<div ng-switch-when="student">
+				<p>Sign up and provide details about your level of experience</p>
+			</div>
+			<div ng-switch-when="company">
+				<p>Documentation must meet certain criteria, sign up for more details</p>
+			</div>
+		</div>
+
+		<br><br>
+
+		<form>
+			What are you interested in?:
+			<select ng-model="interest">
+    			<option value="webDev"> Web Development
+    			<option value="mobileApps">Mobile Applications
+    			<option value="databases">Databases
+    			<option value="other">Other
+			</select>
+		</form>
+
+		<div ng-switch="interest">
+			<div ng-switch-when="webDev">
+				<p>You said you were interested in Web Development, thank you, we will use this to improve user experience.</p>
+			</div>
+			<div ng-switch-when="mobileApps">
+				<p>You said you were interested in Mobile Applications, thank you, we will use this to improve user experience.</p>
+			</div>
+			<div ng-switch-when="databases">
+				<p>You said you were interested in Databases, thank you, we will use this to improve user experience.</p>
+			</div>
+			<div ng-switch-when="other">
+				<p>You said you were interested in other types of projects, thank you, we will use this to improve user experience.</p>
+			</div>
+		</div>
+
+		<br><br>
+
+		<form>
+				Enter your first name: <br>
+				<input type="text" ng-model="fname"> <br>
+				Enter your last Name: <br>
+				<input type="text" ng-model="lname"> <br>
+				<input type="submit" ng-click="generateName()" value="Submit">
+				<h1>your user name is: {{userName}}</h1>
+		</form>
+
+		<h1 ng-show="!(validFname)">Your first name is invalid</h1>
+		<h1 ng-show="!(validLname)">Your last name is invalid</h1>
+
+		<br><br>
+
+		<form>
+				What is your area of expertise?: <br>
+				<input type="text" ng-model="expertise"> <br>
+				How many years of experience do you have?: <br>
+				<input type="number" ng-model="years"> <br>
+				<input type="submit" ng-click="checkYear()" value="Submit">
+		</form>
+		
+		<h1 ng-show="!(validYear)">You did not input a valid number</h1>
+
+		
+		<div ng-include="'TodaysMessage.html'"></div>
+
+		<div ng-include="'PrintProjects.html'"></div>
+
+		<div ng-include="'http://linuxjobber.com/example_file.html'"></div>	
+		<p>AngularJS allows you to include files from other domains such as linuxjobber.com</p>
+
+		
+		<script>
+			var app = angular.module('myApp', []);
+
+			
+
+			app.controller('myCtrl', function($scope, $http, $window) {
+    				$http.get("projects.json").then(function(response) {
+        				$scope.myData = response.data.project;
+    				});
+
+				$scope.options = ["Submit", "FAQ"];
+
+				$scope.options2 = ["Spring IdeaFest", "Fall IdeaFest"];
+
+				$scope.camps = {
+					cc01 : "Spring CodeCampp",
+					cc02 : "Summer CodeCampp",
+					cc03 : "Fall CodeCampp", 
+					cc04 : "Winter CodeCampp"
+				}
+
+				 
+ 				$scope.readMore = function() {
+        				$http.get("ReadMore.html").then(function(response) {
+        					$window.confirm(response.data);
+    					});
+    				}
+
+				$scope.showMe = false;
+
+ 				$scope.showFunc = function() {
+        				$scope.showMe = !$scope.showMe;
+    				}
+
+				
+				$scope.handleClick = function(event) {
+        	    	
+					alert(event.currentTarget.value);
+        		
+				}
+	
+
+				$scope.generateName = function() {
+					$scope.userName = angular.lowercase($scope.fname) + angular.uppercase($scope.lname)
+								+ Math.floor((Math.random() * 99) + 10);
+
+					
+					$scope.validFname = angular.isString($scope.fname);
+					$scope.validLname = angular.isString($scope.lname);
+				}
+			
+				
+				$scope.checkYear = function() {
+					$scope.validYear = angular.isNumber($scope.years);
+				}
+			
+				app.config(function($sceDelegateProvider) {
+					
+			
+    				$sceDelegateProvider.resourceUrlWhitelist([
+        					'https://linuxjobber.com/*'
+    					]);
+				});
+				
+			});
+		</script> 
+	</body>
+</html>
