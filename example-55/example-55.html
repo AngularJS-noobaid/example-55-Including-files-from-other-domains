@@ -239,16 +239,18 @@
 				$scope.checkYear = function() {
 					$scope.validYear = angular.isNumber($scope.years);
 				}
-			
-				app.config(function($sceDelegateProvider) {
-					
-			
-    				$sceDelegateProvider.resourceUrlWhitelist([
-        					'https://linuxjobber.com/*'
-    					]);
-				});
 				
+			
 			});
+				
+			app.config(function($sceDelegateProvider) {
+				$sceDelegateProvider.resourceUrlWhitelist([
+        					'https://linuxjobber.com/*'
+    				]);
+			});
+				
+		
+			
 		</script> 
 	</body>
 </html>
